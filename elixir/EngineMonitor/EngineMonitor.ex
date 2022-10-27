@@ -31,15 +31,20 @@ defmodule EngineMonitor do
   def gt(a, b) when a > b, do: a
   def gt(a, b) when a < b, do: b
 
+  # name: rising 
+  # purpose: exported module function
+  # param: takes a single list, pattern matched to [head | tail]
+  # returns: count of number of rising values in a given list
   def rising([head | tail]) do 
-    if head > hd(tail) do 
-      rising(tail, 1)
-    else
-      rising(tail, 0)
+    if head > hd(tail) do
+      rising(tail, 1) # rise
+    else  
+      rising(tail, 0) # no rise
     end
   end
 
-  def rising([head | tail], count) when length(tail) > 0 do
+  # guard 1 - check if tail has elements, eg: tail = [800], length = 1
+  defp rising([head | tail], count) when length(tail) > 0 do
     if head > hd(tail) do 
       rising(tail, count+1)
     else
@@ -47,7 +52,23 @@ defmodule EngineMonitor do
     end
   end
 
-  def rising([head | tail], count) when length(tail) == 0 do 
+  # guard 2 - check if tail has NO elements, eg: tail = [], length = 1,
+  #           because - we must not call hd(tail) on an empty list
+  defp rising([head | tail], count) when length(tail) == 0 do 
     count
+  end
+
+  #-----------------------------------DANGER------------------------------------------------ 
+  def danger?([head | tail]) do 
+    IO.inspect(tail)
+    if length(tail) > 0 do 
+      if abs(head - hd(tail)) > 50 do
+        true
+      else
+        danger?(tail)
+      end
+    else
+      false
+    end
   end
 end
