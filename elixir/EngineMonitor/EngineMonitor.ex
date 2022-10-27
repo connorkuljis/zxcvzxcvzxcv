@@ -27,19 +27,27 @@ defmodule EngineMonitor do
   end
 
   #---------------------------------------RISING-------------------------------------------- 
-  def rising([head | tail]) do
-    _rising(0, head, tail)
+  # example function guards
+  def gt(a, b) when a > b, do: a
+  def gt(a, b) when a < b, do: b
+
+  def rising([head | tail]) do 
+    if head > hd(tail) do 
+      rising(tail, 1)
+    else
+      rising(tail, 0)
+    end
   end
 
-  defp _rising(counter, _current, []) do
-    counter
+  def rising([head | tail], count) when length(tail) > 0 do
+    if head > hd(tail) do 
+      rising(tail, count+1)
+    else
+      rising(tail, count)
+    end
   end
 
-  defp _rising(counter, current, [head | tail]) when current < head do
-    _rising(counter + 1, head, tail)
-  end
-
-  defp _rising(counter, _current, [head | tail]) do
-    _rising(counter, head, tail)
+  def rising([head | tail], count) when length(tail) == 0 do 
+    count
   end
 end
