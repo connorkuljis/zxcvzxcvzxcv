@@ -60,7 +60,6 @@ defmodule EngineMonitor do
 
   #-----------------------------------DANGER------------------------------------------------ 
   def danger?([head | tail]) do 
-    IO.inspect(tail)
     if length(tail) > 0 do 
       if abs(head - hd(tail)) > 50 do
         true
@@ -68,7 +67,7 @@ defmodule EngineMonitor do
         danger?(tail)
       end
     else
-      false
+      false # base case, but cant early return, so it goes here. eg length(tail) == 0
     end
   end
 end
