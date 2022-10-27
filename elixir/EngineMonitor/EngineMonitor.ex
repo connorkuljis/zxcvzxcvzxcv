@@ -54,7 +54,7 @@ defmodule EngineMonitor do
 
   # guard 2 - check if tail has NO elements, eg: tail = [], length = 1,
   #           because - we must not call hd(tail) on an empty list
-  defp rising([head | tail], count) when length(tail) == 0 do 
+  defp rising([_ | tail], count) when length(tail) == 0 do 
     count
   end
 
@@ -70,4 +70,9 @@ defmodule EngineMonitor do
       false # base case, but cant early return, so it goes here. eg length(tail) == 0
     end
   end
+
+  def fire?(s) do 
+    s =~ ~r/#{"fire"}/i
+  end
+
 end
