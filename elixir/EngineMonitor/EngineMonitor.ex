@@ -75,4 +75,8 @@ defmodule EngineMonitor do
     s =~ ~r/#{"fire"}/i
   end
 
+  def decode(s) do 
+    String.split(s) |> Enum.map(fn st -> String.at(st, 0) end)
+  end
+
 end
