@@ -7,14 +7,15 @@ defmodule EngineMonitor do
     [a | list]
   end
 
+  #------------------------------------MAX_READING------------------------------------------ 
   def max_reading([]), do: :empty_list_error
-
-  defp max_reading([], max) do 
-    max
-  end
 
   def max_reading([head | tail]) do 
     max_reading(tail, head)
+  end
+
+  defp max_reading([], max) do 
+    max
   end
 
   defp max_reading([head | tail], max) when head > max do 
@@ -25,8 +26,20 @@ defmodule EngineMonitor do
     max_reading(tail, max)
   end
 
-  def rising([head | tail]) do 
-
+  #---------------------------------------RISING-------------------------------------------- 
+  def rising([head | tail]) do
+    _rising(0, head, tail)
   end
 
+  defp _rising(counter, _current, []) do
+    counter
+  end
+
+  defp _rising(counter, current, [head | tail]) when current < head do
+    _rising(counter + 1, head, tail)
+  end
+
+  defp _rising(counter, _current, [head | tail]) do
+    _rising(counter, head, tail)
+  end
 end
