@@ -35,12 +35,12 @@ defmodule EngineMonitor do
   # purpose: exported module function
   # param: takes a single list, pattern matched to [head | tail]
   # returns: count of number of rising values in a given list
-  def rising([head | tail]) do 
-    if head > hd(tail) do
+  def rising([head | tail]) when head > hd(tail) do 
       rising(tail, 1) # rise
-    else  
+  end
+
+  def rising([head | tail]) when head <= hd(tail) do 
       rising(tail, 0) # no rise
-    end
   end
 
   # guard 1 - check if tail has elements, eg: tail = [800], length = 1
