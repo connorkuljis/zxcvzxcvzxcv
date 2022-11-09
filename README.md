@@ -1,5 +1,5 @@
 # programming-languages
-repo of code snippets and solutions (elixir, scheme...)
+repo of code snippets elixir
  
-- `elixir/EngineMonitor` 	-> W4 soln
-- `scheme/` 			-> W5 soln
+- `elixir/EngineMonitor` 
+
